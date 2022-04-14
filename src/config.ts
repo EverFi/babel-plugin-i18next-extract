@@ -23,6 +23,7 @@ export interface Config {
   discardOldKeys: boolean;
   jsonSpace: string | number;
   enableExperimentalIcu: boolean;
+  ignoreNodeModules: boolean;
   customTransComponents: readonly [string, string][];
   customUseTranslationHooks: readonly [string, string][];
 
@@ -102,6 +103,7 @@ export function parseConfig(opts: Partial<Config>): Config {
     discardOldKeys: coalesce(opts.discardOldKeys, false),
     jsonSpace: coalesce(opts.jsonSpace, 2),
     enableExperimentalIcu: coalesce(opts.enableExperimentalIcu, false),
+    ignoreNodeModules: coalesce(opts.ignoreNodeModules, false),
     customTransComponents,
     customUseTranslationHooks,
     cache: {
