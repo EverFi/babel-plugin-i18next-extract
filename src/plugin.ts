@@ -48,6 +48,12 @@ function handleExtraction<T>(
 ): T | undefined {
   const filename = (state.file && state.file.opts.filename) || '???';
   const extractState = state.I18NextExtract;
+  if (
+    extractState.config.ignoreNodeModules &&
+    filename.includes('node_modules')
+  ) {
+    return;
+  }
 
   const collect = (newKeysCandidates: ExtractedKey[]): void => {
     const currentKeys = extractState.extractedKeys;
@@ -97,7 +103,7 @@ function handleExtraction<T>(
     // eslint-disable-next-line no-console
     console.warn(
       `${PLUGIN_NAME}: Extraction error in ${filename} at line ` +
-        `${lineNumber}. ${err.message}`,
+      `${lineNumber}. ${err.message}`,
     );
   }
 }
